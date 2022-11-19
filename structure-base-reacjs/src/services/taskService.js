@@ -1,4 +1,4 @@
-const baseUrl = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/tasks`;
+const baseUrl = `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_PORT}/api/tasks`;
 
 export const loadTasks = () => {
     return fetch(baseUrl).then((res) => res.json());
@@ -15,7 +15,7 @@ export const createTask = (task) => {
             "Content-Type": "application/json"
         },
            body: JSON.stringify({
-                title: task.name,
+                 name: task.name,
             completed: task.completed
         }),
     }).then((res) => res.json());
@@ -29,7 +29,7 @@ export const updateTask = (task) => {
         },
            body: JSON.stringify({
                    id: task.id,
-                title: task.name,
+                 name: task.name,
             completed: task.completed
         }),
     }).then((res) => res.json());

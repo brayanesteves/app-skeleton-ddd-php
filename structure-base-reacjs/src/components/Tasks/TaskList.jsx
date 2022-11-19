@@ -41,7 +41,7 @@ const TaskList = () => {
 
     const onRefresh = useCallback(async () => {
         setRefreshing(true);
-        let data = await loadTasks;
+        let data = await loadTasks();
         setTasks(data);
         setActiveTask(data.filter(task => task.completed === false));
         setCompletedTasks(data.filter(task => task.completed === true));
@@ -52,6 +52,33 @@ const TaskList = () => {
     useEffect(() => {
         refresh();
     }, [onRefresh]);
+
+    return (
+        <Layout className="layout">
+            <Content state={{padding:'0 50px'}}>
+                <div className="taskList">
+                    <Row>
+                        <Col span={14} offset={5}>
+                            <h1>Halcon Bits - Tasks</h1>
+                            <TaskForm onFormSubmit={handleFormSubmit} />
+                            <br />
+                            <Tabs defaultActiveKey="all">
+                                <TabPane tab="All" key="all">
+                                    <TaskTab tasks={tasks} onTaskToggle={handleToggleTaskStatus} onTaskRemoval={handleRemoveTask} />
+                                </TabPane>
+                                <TabPane tab="Active" key="active">
+                                    <TaskTab tasks={activeTasks} onTaskToggle={handleToggleTaskStatus} onTaskRemoval={handleRemoveTask} />
+                                </TabPane>
+                                <TabPane tab="Complete" key="complete">
+                                    <TaskTab tasks={completedTasks} onTaskToggle={handleToggleTaskStatus} onTaskRemoval={handleRemoveTask} />
+                                </TabPane>
+                            </Tabs>
+                        </Col>
+                    </Row>
+                </div>
+            </Content>
+        </Layout>
+    );
     
 };
 

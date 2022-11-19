@@ -20,7 +20,7 @@ const Task = ({ task, onTaskRemoval, onTaskToggle }) => {
         key={task.id}
         >
             <div className="task-item">
-                <Tag color={todo.completed ? 'cyan' : 'red'} className="todo-tag">
+                <Tag color={task.completed ? 'cyan' : 'red'} className="task-tag">
                     {task.name}
                 </Tag>
             </div>

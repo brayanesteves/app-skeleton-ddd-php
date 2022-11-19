@@ -5,9 +5,9 @@ import Task from "./TaskItem";
 const TaskTab = ({ tasks, onTaskRemoval, onTaskToggle }) => {
     return (
         <>
-            <List locale={ { emptyText:"There's nothing to do:(" } } dataSource={tasks} renderItem={(task) => {
-                <Task task={task} onTaskToggle={onTaskToggle} onTaskRemoval={onTaskRemoval}  />
-            }} pagination={{
+            <List locale={ { emptyText:"There's nothing to do:(" } } dataSource={tasks} renderItem={(task) => 
+                (<Task task={task} onTaskToggle={onTaskToggle} onTaskRemoval={onTaskRemoval}  />)
+            } pagination={{
                 position:'bottom',
                 pageSize:10,
             }} />
