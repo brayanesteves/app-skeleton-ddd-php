@@ -12,7 +12,7 @@ const TaskList = () => {
     const [refreshing, setRefreshing]         = useState(false);
     const [tasks, setTasks]                   = useState([]);
     const [activeTasks, setActiveTask]        = useState([]);
-    const [completedTasks, setCompletedTasks] = useState();
+    const [completedTasks, setCompletedTasks] = useState([]);
 
     const handleFormSubmit = (task) => {
         console.log('Task to create', task);
@@ -33,9 +33,10 @@ const TaskList = () => {
 
     const refresh = () => {
         loadTasks().then(json => {
+            console.log(json)
             setTasks(json);
-            setActiveTask(json.filter(task => task.completed === false));
-            setCompletedTasks(json.filter(task => task.completed === true));
+            setActiveTask(json.filter(task => task.completed === 0 || task.completed === false));
+            setCompletedTasks(json.filter(task => task.completed === 1 || task.completed === true));
         }).then(console.log('Fetch completed'));
     };
 
@@ -43,8 +44,8 @@ const TaskList = () => {
         setRefreshing(true);
         let data = await loadTasks();
         setTasks(data);
-        setActiveTask(data.filter(task => task.completed === false));
-        setCompletedTasks(data.filter(task => task.completed === true));
+        setActiveTask(data.filter(task => task.completed === 0 || task.completed === false));
+        setCompletedTasks(data.filter(task => task.completed === 1 || task.completed === true));
         setRefreshing(false);
         console.log('Refresh state', refreshing);
     }, [refreshing]);

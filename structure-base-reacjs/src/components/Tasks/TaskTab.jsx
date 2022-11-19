@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Tabs, Layout, Row, Col, List } from 'antd';
 import Task from "./TaskItem";
 
-const TaskTab = ({ tasks, onTaskRemoval, onTaskToggle }) => {
+const TaskTab = ({ tasks, onTaskToggle, onTaskRemoval }) => {
     return (
         <>
             <List locale={ { emptyText:"There's nothing to do:(" } } dataSource={tasks} renderItem={(task) => 
