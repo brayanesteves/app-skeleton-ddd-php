@@ -20,6 +20,10 @@ const TaskList = () => {
         message.success('Task added!');
     };
 
+    const onSearch = (task) => {
+
+    };
+
     const handleRemoveTask = (task) => {
         deleteTask(task.id).then(onRefresh());
         message.warn('Task removed');
@@ -33,7 +37,6 @@ const TaskList = () => {
 
     const refresh = () => {
         loadTasks().then(json => {
-            console.log(json)
             setTasks(json);
             setActiveTask(json.filter(task => task.completed === 0 || task.completed === false));
             setCompletedTasks(json.filter(task => task.completed === 1 || task.completed === true));
@@ -61,7 +64,7 @@ const TaskList = () => {
                     <Row>
                         <Col span={14} offset={5}>
                             <h1>Halcon Bits - Tasks</h1>
-                            <TaskForm onFormSubmit={handleFormSubmit} />
+                            <TaskForm onFormSubmit={handleFormSubmit} onSearchs={onSearch} />
                             <br />
                             <Tabs defaultActiveKey="all">
                                 <TabPane tab="All" key="all">

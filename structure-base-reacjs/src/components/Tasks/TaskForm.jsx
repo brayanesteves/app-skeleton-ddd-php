@@ -14,12 +14,18 @@ const TaskForm = ({ onFormSubmit }) => {
         form.resetFields();
     };
 
+    const onSearchs = (a) => {
+        
+        searchInput.localeCompare(a => a.name)
+    };
+
     useEffect(() => {
+        onSearchs(searchInput);
         console.log(searchInput);
     }, [searchInput]);
 
     return(
-        <Form form={form} onFinish={onFinish} layout={"horizontal"} className="todo-form">
+        <Form form={form} layout={"horizontal"} className="todo-form">
             <Row gutter={20}>
                 <Col xs={24} sm={24} md={17} lg={19} xl={20}>
                     <Form.Item name={'name'} rules={[{ required: true, message:'This field is required' }]}>
@@ -27,7 +33,7 @@ const TaskForm = ({ onFormSubmit }) => {
                     </Form.Item>
                 </Col>
                 <Col xs={24} sm={24} md={7} lg={5} xl={4}>
-                    <Button type="primary" htmlType="submit" block>
+                    <Button onClick={onFinish} type="primary" htmlType="submit" block>
                         <PlusCircleFilled />
                         Add Task
                     </Button>
