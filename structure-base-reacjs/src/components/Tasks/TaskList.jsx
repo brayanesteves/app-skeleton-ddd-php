@@ -13,6 +13,7 @@ const TaskList = () => {
     const [tasks, setTasks]                   = useState([]);
     const [activeTasks, setActiveTask]        = useState([]);
     const [completedTasks, setCompletedTasks] = useState([]);
+    const [searchInput, setSearchInput]       = useState('');
 
     const handleFormSubmit = (task) => {
         console.log('Task to create', task);
@@ -21,7 +22,7 @@ const TaskList = () => {
     };
 
     const onSearch = (task) => {
-
+        setSearchInput(task);
     };
 
     const handleRemoveTask = (task) => {
@@ -32,7 +33,11 @@ const TaskList = () => {
     const handleToggleTaskStatus = (task) => {
         task.completed = !task.completed;
         updateTask(task).then(onRefresh());
-        message.info('Task status removed');
+        if(!task.completed) {
+            message.info('Task status removed');
+        } else {
+            message.info('Task status completed');
+        }
     };
 
     const refresh = () => {
@@ -64,17 +69,17 @@ const TaskList = () => {
                     <Row>
                         <Col span={14} offset={5}>
                             <h1>Halcon Bits - Tasks</h1>
-                            <TaskForm onFormSubmit={handleFormSubmit} onSearchs={onSearch} />
+                            <TaskForm onFormSubmit={handleFormSubmit} onSearchIn={onSearch} />
                             <br />
                             <Tabs defaultActiveKey="all">
                                 <TabPane tab="All" key="all">
-                                    <TaskTab tasks={tasks} onTaskToggle={handleToggleTaskStatus} onTaskRemoval={handleRemoveTask} />
+                                    <TaskTab tasks={tasks} onTaskToggle={handleToggleTaskStatus} onTaskRemoval={handleRemoveTask} onSearchs={searchInput} />
                                 </TabPane>
                                 <TabPane tab="Active" key="active">
-                                    <TaskTab tasks={activeTasks} onTaskToggle={handleToggleTaskStatus} onTaskRemoval={handleRemoveTask} />
+                                    <TaskTab tasks={activeTasks} onTaskToggle={handleToggleTaskStatus} onTaskRemoval={handleRemoveTask} onSearchs={searchInput} />
                                 </TabPane>
                                 <TabPane tab="Complete" key="complete">
-                                    <TaskTab tasks={completedTasks} onTaskToggle={handleToggleTaskStatus} onTaskRemoval={handleRemoveTask} />
+                                    <TaskTab tasks={completedTasks} onTaskToggle={handleToggleTaskStatus} onTaskRemoval={handleRemoveTask} onSearchs={searchInput} />
                                 </TabPane>
                             </Tabs>
                         </Col>

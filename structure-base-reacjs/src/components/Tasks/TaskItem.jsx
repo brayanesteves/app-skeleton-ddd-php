@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Tooltip, Tag, List, Button, Popconfirm, Switch } from 'antd';
+import { Tooltip, Tag, List, Button, Popconfirm, Switch, Table } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
 const Task = ({ task, onTaskRemoval, onTaskToggle }) => {
     return (
+        <>
         <List.Item actions={[
             <Tooltip title={task.completed ? 'Mark as uncompleted' : 'Mark as completed'}>
                 <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} onChange={() => onTaskToggle(task)} defaultChecked={task.completed} />
@@ -25,6 +26,7 @@ const Task = ({ task, onTaskRemoval, onTaskToggle }) => {
                 </Tag>
             </div>
         </List.Item>
+        </>
     );
 };
 
